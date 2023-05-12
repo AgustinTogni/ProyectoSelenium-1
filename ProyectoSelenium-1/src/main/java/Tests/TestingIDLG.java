@@ -23,14 +23,23 @@ public class TestingIDLG {
     }
 
     @Test(priority = 1)
-    public void loginWithValidData() throws InterruptedException {
+    public void RegisterWithValidData() throws InterruptedException {
 
         // Credentials
+        String username = "Agustin";
+        String password = "Togni Balassi";
 
-        // Locators
+        // Test
+        WebElement btnLogIn = driver.findElement(By.className("mat-button-wrapper"));
+        btnLogIn.click();
 
-        //Test
+        WebElement btnCreateAccount = driver.findElement(By.className("mat-stroked-button"));
+        btnCreateAccount.click();
 
+        WebElement usernameInput = driver.findElement(By.id("mat-input-2"));
+        WebElement passwordInput = driver.findElement(By.id("mat-input-3"));
+        usernameInput.sendKeys(username);
+        passwordInput.sendKeys(password);
     }
 
     @AfterMethod
