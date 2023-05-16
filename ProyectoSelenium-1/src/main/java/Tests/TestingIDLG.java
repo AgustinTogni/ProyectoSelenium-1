@@ -30,7 +30,7 @@ public class TestingIDLG {
         driver.get(url);
     }
 
-    //@Test(priority = 1) unfinished.
+    // @Test(priority = 0) unfinished.
     public void LoginWithValidDataLG001() throws InterruptedException {
 
         // Credentials
@@ -38,11 +38,11 @@ public class TestingIDLG {
         String password = "";
 
         // Test
-        WebElement btnLogIn = driver.findElement(By.className("mat-button-wrapper"));
+        WebElement btnLogIn = driver.findElement(By.className("mat-focus-indicator"));
         btnLogIn.click();
 
-        WebElement emailInput = driver.findElement(By.cssSelector("div.ng-star-inserted input"));
-        emailInput.sendKeys("");
+        WebElement emailInput = driver.findElement(By.className("mat-form-field-autofill-control"));
+        emailInput.sendKeys(email);
 
         WebElement btnContinue = driver.findElement(By.className("mat-raised-button"));
         btnContinue.click();
@@ -89,16 +89,13 @@ public class TestingIDLG {
     @Test(priority = 2)
     public void RegisterWithValidDataLG003() throws InterruptedException {
 
-        // Credentials
-        String phone = "82372233";
-
         // Test
         driver.findElement(By.className("mat-button-wrapper")).click();
 
         driver.findElement(By.className("mat-stroked-button")).click();
 
         WebElement phoneInput = driver.findElement(By.id("mat-input-6"));
-        phoneInput.sendKeys(phone);
+        phoneInput.sendKeys("82372233");
 
         String phoneCheck = phoneInput.getAttribute("value");
         if (!phoneCheck.isEmpty()) {
@@ -164,7 +161,7 @@ public class TestingIDLG {
         }
     }
 
-    //@Test(priority = 1) unfinished.
+    //@Test(priority = 0) unfinished.
     public void RegisterWithoutEnteringDataLG007() throws InterruptedException {
 
         // Test
@@ -176,8 +173,27 @@ public class TestingIDLG {
 
         String colorBackground = registerBtn.getCssValue("background-color");
 
-        String ExpectedColor = "rgb(0,0,0,.12)";
-        Assert.assertEquals("El color de fondo no coincide", ExpectedColor, colorBackground);
+        String ExpectedColor = "rgb(224, 224, 224)";
+        Assert.assertEquals("Background color does not match", ExpectedColor, colorBackground);
+    }
+
+    @Test(priority = 6)
+    public void RegisterWithLettersInThePhoneFieldLG008() throws InterruptedException {
+
+        // Test
+        driver.findElement(By.className("mat-button-wrapper")).click();
+
+        driver.findElement(By.className("mat-stroked-button")).click();
+
+        WebElement phoneInput = driver.findElement(By.id("mat-input-6"));
+        phoneInput.sendKeys("LLDALDASA");
+
+        String fieldCheck = phoneInput.getAttribute("value");
+        if (!fieldCheck.isEmpty()) {
+            Assert.fail("The field is complete");
+        } else {
+            System.out.println("The field is empty");
+        }
     }
 
     @AfterMethod
