@@ -5,6 +5,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,7 +30,7 @@ public class TestingIDLG {
         driver.get(url);
     }
 
-    // @Test(priority = 1) unfinished.
+    //@Test(priority = 1) unfinished.
     public void LoginWithValidDataLG001() throws InterruptedException {
 
         // Credentials
@@ -66,18 +67,22 @@ public class TestingIDLG {
 
         WebElement usernameInput = driver.findElement(By.id("mat-input-2"));
         usernameInput.sendKeys(username);
-        if(usernameInput.getAttribute("value").equals("Agustin")) {
-            System.out.println("The entered username is present in the text field.");
+
+        String usernameCheck = usernameInput.getAttribute("value");
+        if (!usernameCheck.isEmpty()) {
+            System.out.println("The field is complete");
         } else {
-            System.out.println("The entered username is not present in the text field.");
+            Assert.fail("The field is empty");
         }
 
         WebElement lastnameInput = driver.findElement(By.id("mat-input-3"));
         lastnameInput.sendKeys(lastname);
-        if(lastnameInput.getAttribute("value").equals("Togni Balassi")) {
-            System.out.println("The entered lastname is present in the text field.");
+
+        String lastnameCheck = lastnameInput.getAttribute("value");
+        if (!lastnameCheck.isEmpty()) {
+            System.out.println("The field is complete");
         } else {
-            System.out.println("The entered lastname is not present in the text field.");
+            Assert.fail("The field is empty");
         }
     }
 
@@ -85,26 +90,28 @@ public class TestingIDLG {
     public void RegisterWithValidDataLG003() throws InterruptedException {
 
         // Credentials
-        String phone = "78263242";
+        String phone = "82372233";
 
-        //Test
+        // Test
         driver.findElement(By.className("mat-button-wrapper")).click();
 
         driver.findElement(By.className("mat-stroked-button")).click();
 
         WebElement phoneInput = driver.findElement(By.id("mat-input-6"));
         phoneInput.sendKeys(phone);
-        if(phoneInput.getAttribute("value").equals("78263242")) {
-            System.out.println("The entered phone is present in the text field.");
+
+        String phoneCheck = phoneInput.getAttribute("value");
+        if (!phoneCheck.isEmpty()) {
+            System.out.println("The field is complete");
         } else {
-            System.out.println("The entered phone is not present in the text field.");
+            Assert.fail("The field is empty");
         }
     }
 
     @Test(priority = 3)
     public void CorrectRedirectionOfAlreadyHaveAnAccountLG004() throws InterruptedException {
 
-        //Test
+        //  Test
         driver.findElement(By.className("mat-button-wrapper")).click();
 
         driver.findElement(By.className("mat-stroked-button")).click();
@@ -117,6 +124,60 @@ public class TestingIDLG {
         } else {
             System.out.println("The windows login is not visible.");
         }
+    }
+
+    @Test(priority = 4)
+    public void RegisterWithNumbersInTheNameFieldLG005() throws InterruptedException {
+
+        //  Test
+        driver.findElement(By.className("mat-button-wrapper")).click();
+
+        driver.findElement(By.className("mat-stroked-button")).click();
+
+        WebElement nameInput = driver.findElement(By.id("mat-input-2"));
+        nameInput.sendKeys("1231312312");
+
+        String fieldCheck = nameInput.getAttribute("value");
+        if (!fieldCheck.isEmpty()) {
+            Assert.fail("The field is complete");
+        } else {
+            System.out.println("The field is empty");
+        }
+    }
+
+    @Test(priority = 5)
+    public void RegisterWithSpecialCharactersInTheLastnameFieldLG006() throws InterruptedException {
+
+        // Test
+        driver.findElement(By.className("mat-button-wrapper")).click();
+
+        driver.findElement(By.className("mat-stroked-button")).click();
+
+        WebElement lastnameInput = driver.findElement(By.id("mat-input-3"));
+        lastnameInput.sendKeys("%$@$@#$@%");
+
+        String fieldCheck = lastnameInput.getAttribute("value");
+        if (!fieldCheck.isEmpty()) {
+            Assert.fail("The field is complete");
+        } else {
+            System.out.println("The field is empty");
+        }
+    }
+
+    //@Test(priority = 1) unfinished.
+    public void RegisterWithoutEnteringDataLG007() throws InterruptedException {
+
+        // Test
+        driver.findElement(By.className("mat-button-wrapper")).click();
+
+        driver.findElement(By.className("mat-stroked-button")).click();
+
+        WebElement registerBtn = driver.findElement(By.className("mat-button-base"));
+
+        String colorBackground = registerBtn.getCssValue("background-color");
+
+        String ExpectedColor = "rgb(0,0,0,.12)";
+        Assert.assertEquals("El color de fondo no coincide", ExpectedColor, colorBackground);
     }
 
     @AfterMethod
