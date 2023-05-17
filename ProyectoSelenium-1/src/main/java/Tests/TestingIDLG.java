@@ -9,20 +9,26 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.Set;
+import java.time.Duration;
 
 public class TestingIDLG {
 
     private String url = "https://compragamer.com/";
     WebDriver driver;
     Logger log;
+    WebDriverWait wait;
 
     @BeforeMethod
     public void setBaseUrl(){
         System.setProperty("webdriver.chrome.driver", "E:\\ProyectosSelinium\\ProyectoSelenium-1\\src\\main\\resources\\drivers\\chromedriver.exe");
         driver = new ChromeDriver();
         log = LogManager.getLogger(TestingIDLG.class);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         log.info("#######");
         log.info("[ Driver Status ] initializing");
@@ -30,7 +36,7 @@ public class TestingIDLG {
         driver.get(url);
     }
 
-    // @Test(priority = 0) unfinished.
+    //@Test(priority = 0) unfinished.
     public void LoginWithValidDataLG001() throws InterruptedException {
 
         // Credentials
@@ -38,19 +44,16 @@ public class TestingIDLG {
         String password = "";
 
         // Test
-        WebElement btnLogIn = driver.findElement(By.className("mat-focus-indicator"));
-        btnLogIn.click();
+        driver.findElement(By.className("mat-focus-indicator")).click();
 
-        WebElement emailInput = driver.findElement(By.className("mat-form-field-autofill-control"));
-        emailInput.sendKeys(email);
+        driver.findElement(By.cssSelector("div.ng-tns-c103-4 input.mat-input-element")).sendKeys(email);;
 
-        WebElement btnContinue = driver.findElement(By.className("mat-raised-button"));
-        btnContinue.click();
+        driver.findElement(By.className("continue")).click();
 
-        driver.findElement(By.className("mat-form-field-autofill-control")).sendKeys(password);
+        By passwordSelector = By.cssSelector("div.ng-tns-c103-6 input.mat-input-element");
+        WebElement passwordInput = wait.until(ExpectedConditions.presenceOfElementLocated(passwordSelector));
 
-        driver.findElement(By.className("mat-raised-button")).click();
-
+        passwordInput.sendKeys(password);
     }
 
     @Test(priority = 1)
