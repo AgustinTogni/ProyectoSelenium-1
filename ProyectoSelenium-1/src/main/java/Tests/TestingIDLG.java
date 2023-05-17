@@ -36,7 +36,7 @@ public class TestingIDLG {
         driver.get(url);
     }
 
-    //@Test(priority = 0) unfinished.
+    @Test(enabled = false) // Unfinished.
     public void LoginWithValidDataLG001() throws InterruptedException {
 
         // Credentials
@@ -164,7 +164,7 @@ public class TestingIDLG {
         }
     }
 
-    //@Test(priority = 0) unfinished.
+    @Test(enabled = false) // Unfinished.
     public void RegisterWithoutEnteringDataLG007() throws InterruptedException {
 
         // Test
