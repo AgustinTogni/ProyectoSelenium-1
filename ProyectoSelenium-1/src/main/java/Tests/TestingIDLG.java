@@ -1,10 +1,8 @@
 package Tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import org.apache.logging.log4j.LogManager;
@@ -36,7 +34,7 @@ public class TestingIDLG {
         driver.get(url);
     }
 
-    @Test(enabled = false) // Unfinished.
+    @Test(priority = 1)
     public void LoginWithValidDataLG001() throws InterruptedException {
 
         // Credentials
@@ -54,9 +52,25 @@ public class TestingIDLG {
         WebElement passwordInput = wait.until(ExpectedConditions.presenceOfElementLocated(passwordSelector));
 
         passwordInput.sendKeys(password);
+
+        WebElement enterBtn = driver.findElement(By.xpath("//*[@id=\"mat-dialog-0\"]/cgw-dialog-modal/div/cgw-login/div/div/div/button[1]/span"));
+
+        Point location = enterBtn.getLocation();
+        int positionX = location.getX();
+        int positionY = location.getY();
+
+        Actions actions = new Actions(driver);
+        actions.moveByOffset(positionX, positionY).click().build().perform();
+
+        WebElement homeLogo = driver.findElement(By.className("logo"));
+        if (homeLogo.isDisplayed()) {
+            System.out.println("The session was started.");
+        } else {
+            System.out.println("The session wasn't started.");
+        }
     }
 
-    @Test(priority = 1)
+    @Test(priority = 2)
     public void RegisterWithValidDataLG002() throws InterruptedException {
 
         // Credentials
@@ -89,7 +103,7 @@ public class TestingIDLG {
         }
     }
 
-    @Test(priority = 2)
+    @Test(priority = 3)
     public void RegisterWithValidDataLG003() throws InterruptedException {
 
         // Test
@@ -108,7 +122,7 @@ public class TestingIDLG {
         }
     }
 
-    @Test(priority = 3)
+    @Test(priority = 4)
     public void CorrectRedirectionOfAlreadyHaveAnAccountLG004() throws InterruptedException {
 
         //  Test
@@ -126,7 +140,7 @@ public class TestingIDLG {
         }
     }
 
-    @Test(priority = 4)
+    @Test(priority = 5)
     public void RegisterWithNumbersInTheNameFieldLG005() throws InterruptedException {
 
         //  Test
@@ -145,7 +159,7 @@ public class TestingIDLG {
         }
     }
 
-    @Test(priority = 5)
+    @Test(priority = 6)
     public void RegisterWithSpecialCharactersInTheLastnameFieldLG006() throws InterruptedException {
 
         // Test
@@ -164,7 +178,7 @@ public class TestingIDLG {
         }
     }
 
-    @Test(enabled = false) // Unfinished.
+    @Test(priority = 7)
     public void RegisterWithoutEnteringDataLG007() throws InterruptedException {
 
         // Test
@@ -172,15 +186,16 @@ public class TestingIDLG {
 
         driver.findElement(By.className("mat-stroked-button")).click();
 
-        WebElement registerBtn = driver.findElement(By.className("mat-button-base"));
+        WebElement registerBtn = driver.findElement(By.xpath("//*[@id=\"mat-dialog-0\"]/cgw-dialog-modal/div/cgw-login/div[2]/cgw-register/div/div/form/button"));
 
-        String colorBackground = registerBtn.getCssValue("background-color");
-
-        String ExpectedColor = "rgb(224, 224, 224)";
-        Assert.assertEquals("Background color does not match", ExpectedColor, colorBackground);
+        if (!registerBtn.isEnabled()) {
+            System.out.println("The button is disable.");
+        } else {
+            Assert.fail("The button is enabled.");
+        }
     }
 
-    @Test(priority = 6)
+    @Test(priority = 8)
     public void RegisterWithLettersInThePhoneFieldLG008() throws InterruptedException {
 
         // Test
