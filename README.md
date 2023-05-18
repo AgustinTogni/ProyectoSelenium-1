@@ -15,3 +15,5 @@ Realice este trabajo, con el único fin de practicar y mejorar mis conocimientos
 - Intellij IDEA
 	- JAVA
 	- Selenium
+- Paquete Office
+	- Excel
