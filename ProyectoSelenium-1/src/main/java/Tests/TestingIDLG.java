@@ -38,8 +38,8 @@ public class TestingIDLG {
     public void LoginWithValidDataLG001() throws InterruptedException {
 
         // Credentials
-        String email = "";
-        String password = "";
+        String email = "Admin123@gmail.com";
+        String password = "Admin";
 
         // Test
         driver.findElement(By.className("mat-focus-indicator")).click();
@@ -179,7 +179,7 @@ public class TestingIDLG {
     }
 
     @Test(priority = 7)
-    public void RegisterWithoutEnteringDataLG007() throws InterruptedException {
+    public void RegisterWithOutEnteringDataLG007() throws InterruptedException {
 
         // Test
         driver.findElement(By.className("mat-button-wrapper")).click();

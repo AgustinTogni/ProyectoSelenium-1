@@ -31,13 +31,14 @@ public class TestingIDCRT {
     }
 
     @Test(priority = 1)
-    public void ButtonSEGUIRCOMPRANDOCRT001() throws InterruptedException {
+    public void ButtonKeepBuyingCRT001() throws InterruptedException {
 
         log.info("#######");
         log.info("[ Driver Status ] initializing");
         log.info("#######");
         driver.get(url);
 
+        // Test
         driver.findElement(By.xpath("//*[@id=\"wrapper\"]/cgw-patch/div/div/cgw-shopping-cart/div/div/div[2]/div/button/span/span")).click();
 
         try {
@@ -62,6 +63,7 @@ public class TestingIDCRT {
         log.info("#######");
         driver.get(url2);
 
+        // Test
         By btnAddToCartSelector = By.xpath("//*[@id=\"productos-container\"]/div/div/div/cgw-products-list/div/div[2]/div[2]/div/cgw-product-alone[1]/div/div[2]/div[3]/button");
         WebElement btnAddToCart = wait.until(ExpectedConditions.presenceOfElementLocated(btnAddToCartSelector));
 
@@ -84,6 +86,7 @@ public class TestingIDCRT {
         log.info("#######");
         driver.get(url2);
 
+        // Test
         By btnAddToCartSelector = By.xpath("//*[@id=\"productos-container\"]/div/div/div/cgw-products-list/div/div[2]/div[2]/div/cgw-product-alone[1]/div/div[2]/div[3]/button");
         WebElement btnAddToCart = wait.until(ExpectedConditions.presenceOfElementLocated(btnAddToCartSelector));
 
@@ -115,6 +118,7 @@ public class TestingIDCRT {
         log.info("#######");
         driver.get(url2);
 
+        // Test
         By btnAddToCartSelector = By.xpath("//*[@id=\"productos-container\"]/div/div/div/cgw-products-list/div/div[2]/div[2]/div/cgw-product-alone[1]/div/div[2]/div[3]/button");
         WebElement btnAddToCart = wait.until(ExpectedConditions.presenceOfElementLocated(btnAddToCartSelector));
 
@@ -139,14 +143,15 @@ public class TestingIDCRT {
     @Test(priority = 5)
     public void InvalidDiscountCodeCRT005() throws InterruptedException {
 
-        // Credentials
-        String discountCode = "InvalidCode123";
-
         log.info("#######");
         log.info("[ Driver Status ] initializing");
         log.info("#######");
         driver.get(url2);
 
+        // Credentials
+        String discountCode = "InvalidCode123";
+
+        // Test
         By btnAddToCartSelector = By.xpath("//*[@id=\"productos-container\"]/div/div/div/cgw-products-list/div/div[2]/div[2]/div/cgw-product-alone[1]/div/div[2]/div[3]/button");
         WebElement btnAddToCart = wait.until(ExpectedConditions.presenceOfElementLocated(btnAddToCartSelector));
 
@@ -179,6 +184,7 @@ public class TestingIDCRT {
         log.info("#######");
         driver.get(url2);
 
+        // Test
         By btnAddToCartSelector = By.xpath("//*[@id=\"productos-container\"]/div/div/div/cgw-products-list/div/div[2]/div[2]/div/cgw-product-alone[1]/div/div[2]/div[3]/button");
         WebElement btnAddToCart = wait.until(ExpectedConditions.presenceOfElementLocated(btnAddToCartSelector));
 
@@ -210,6 +216,7 @@ public class TestingIDCRT {
         log.info("#######");
         driver.get(url2);
 
+        // Test
         By btnAddToCartSelector = By.xpath("//*[@id=\"productos-container\"]/div/div/div/cgw-products-list/div/div[2]/div[2]/div/cgw-product-alone[1]/div/div[2]/div[3]/button");
         WebElement btnAddToCart = wait.until(ExpectedConditions.presenceOfElementLocated(btnAddToCartSelector));
 
@@ -241,6 +248,7 @@ public class TestingIDCRT {
         log.info("#######");
         driver.get(url2);
 
+        // Test
         By btnAddToCartSelector = By.xpath("//*[@id=\"productos-container\"]/div/div/div/cgw-products-list/div/div[2]/div[2]/div/cgw-product-alone[1]/div/div[2]/div[3]/button");
         WebElement btnAddToCart = wait.until(ExpectedConditions.presenceOfElementLocated(btnAddToCartSelector));
 

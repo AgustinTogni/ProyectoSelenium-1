@@ -40,6 +40,7 @@ public class TestingIDPDT {
         log.info("#######");
         driver.get(url);
 
+        // Test
         driver.manage().window().maximize();
 
         driver.findElement(By.className("boton-inactivo")).click();
@@ -60,50 +61,69 @@ public class TestingIDPDT {
         log.info("#######");
         driver.get(url);
 
+        // Test
         driver.findElement(By.className("mat-select-arrow-wrapper")).click();
 
         List<WebElement> options = driver.findElements(By.className("mat-option-text"));
 
+        boolean actionPerformed = false;
         for (WebElement featuredOption : options) {
             if (featuredOption.getText().equals("Destacados")) {
                 featuredOption.click();
+                actionPerformed = true;
                 break;
             }
+        }
+
+        if (actionPerformed) {
+            System.out.println("The featured filter is enable.");
+        } else {
+            System.out.println("The featured filter is disable.");
         }
     }
 
     @Test(priority = 3)
-    public void higherPriceFilterPDT003() throws InterruptedException {
+    public void HigherPriceFilterPDT003() throws InterruptedException {
 
         log.info("#######");
         log.info("[ Driver Status ] initializing");
         log.info("#######");
         driver.get(url);
 
+        // Test
         driver.findElement(By.className("mat-select-arrow-wrapper")).click();
 
         List<WebElement> options = driver.findElements(By.className("mat-option-text"));
 
+        boolean actionPerformed = false;
         for (WebElement featuredOption : options) {
             if (featuredOption.getText().equals("Mayor precio")) {
                 featuredOption.click();
+                actionPerformed = true;
                 break;
             }
         }
+
+        if (actionPerformed) {
+            System.out.println("The higher price filter is enable.");
+        } else {
+            System.out.println("The higher price filter is disable.");
+        }
     }
 
-    @Test(enabled = false) // Unfinished.
-    public void addToCartPDT004() throws InterruptedException {
-
-        // Credentials
-        String email = "";
-        String password = "";
+    @Test(priority = 4)
+    public void AddToCartPDT004() throws InterruptedException {
 
         log.info("#######");
         log.info("[ Driver Status ] initializing");
         log.info("#######");
         driver.get(url2);
 
+        // Credentials
+        String email = "Admin123@gmail.com";
+        String password = "Admin";
+
+        // Test
         driver.manage().window().maximize();
 
         driver.findElement(By.className("mat-button-wrapper")).click();
@@ -126,20 +146,162 @@ public class TestingIDPDT {
 
         driver.findElement(By.id("productos")).click();
 
+        By btnAddToCartSelector = By.xpath("//*[@id=\"productos-container\"]/div/div/div/cgw-products-list/div/div[2]/div[2]/div/cgw-product-alone[1]/div/div[2]/div[3]/button");
+        WebElement btnAddToCart = wait.until(ExpectedConditions.presenceOfElementLocated(btnAddToCartSelector));
+
+        btnAddToCart.click();
+
+        WebElement cart = driver.findElement(By.id("carrito-angular"));
+        if (cart.isDisplayed()) {
+            System.out.println("The product was add to cart");
+        } else {
+            Assert.fail("The product was not add to cart");
+        }
+
     }
 
-    @Test(enabled = false) // Unfinished.
-    public void addInfiniteProductsToCartPDT005() throws InterruptedException {}
+    @Test(priority = 5)
+    public void AddInfiniteProductsToCartPDT005() throws InterruptedException {
 
-    @Test(enabled = false) // Unfinished.
+        log.info("#######");
+        log.info("[ Driver Status ] initializing");
+        log.info("#######");
+        driver.get(url2);
+
+        // Credentials
+        String email = "Admin123@gmail.com";
+        String password = "Admin";
+
+        // Test
+        driver.manage().window().maximize();
+
+        driver.findElement(By.className("mat-button-wrapper")).click();
+
+        driver.findElement(By.cssSelector("div.ng-tns-c103-4 input.mat-input-element")).sendKeys(email);
+
+        driver.findElement(By.className("continue")).click();
+
+        By passwordSelector = By.cssSelector("div.ng-tns-c103-6 input.mat-input-element");
+        WebElement passwordInput = wait.until(ExpectedConditions.presenceOfElementLocated(passwordSelector));
+
+        passwordInput.sendKeys(password);
+
+        WebElement enterBtn = driver.findElement(By.xpath("//*[@id=\"mat-dialog-0\"]/cgw-dialog-modal/div/cgw-login/div/div/div/button[1]/span"));
+        Point location = enterBtn.getLocation();
+        int positionX = location.getX();
+        int positionY = location.getY();
+        Actions actions = new Actions(driver);
+        actions.moveByOffset(positionX, positionY).click().build().perform();
+
+        driver.findElement(By.id("productos")).click();
+
+        By btnAddToCartSelector = By.xpath("//*[@id=\"productos-container\"]/div/div/div/cgw-products-list/div/div[2]/div[2]/div/cgw-product-alone[1]/div/div[2]/div[3]/button");
+        WebElement btnAddToCart = wait.until(ExpectedConditions.presenceOfElementLocated(btnAddToCartSelector));
+
+        while (btnAddToCart.isEnabled()) {
+            btnAddToCart.click();
+        }
+
+        if (!btnAddToCart.isEnabled()) {
+            System.out.println("The button is disable.");
+        } else {
+            Assert.fail("The button is enabled.");
+        }
+    }
+
+    @Test(priority = 6)
     public void LettersInTheMinimumPriceFilterPDT006() throws InterruptedException {
 
-        List<WebElement> listElements = driver.findElements(By.cssSelector(".mat-expansion-panel-header-title"));
-        for (WebElement notebooksOption : listElements) {
-            if (notebooksOption.getText().equals("Equipos y Notebooks")) {
-                notebooksOption.click();
-                break;
-            }
+        log.info("#######");
+        log.info("[ Driver Status ] initializing");
+        log.info("#######");
+        driver.get(url);
+
+        // Test
+        By hardwareAndNotebooksSelector = By.xpath("//*[@id=\"mat-expansion-panel-header-21\"]/span/mat-panel-title");
+        WebElement hardwareAndNotebook = wait.until(ExpectedConditions.presenceOfElementLocated(hardwareAndNotebooksSelector));
+
+        hardwareAndNotebook.click();
+
+        By notebookOptionSelector = By.xpath("//*[@id=\"cdk-accordion-child-21\"]/div/p[2]/span");
+        WebElement notebookOption = wait.until(ExpectedConditions.elementToBeClickable(notebookOptionSelector));
+
+        notebookOption.click();
+
+        By minimumFieldSelector = By.id("mat-input-1");
+        WebElement minimumField = wait.until(ExpectedConditions.elementToBeClickable(minimumFieldSelector));
+
+        minimumField.sendKeys("LSRSTS");
+
+        String minimumFieldCheck = minimumField.getAttribute("value");
+        if (!minimumFieldCheck.isEmpty()) {
+            Assert.fail("The field is complete.");
+        } else {
+            System.out.println("The field is empty.");
+        }
+    }
+
+    @Test(priority = 7)
+    public void LettersInTheMaximumPriceFilterPDT007() throws InterruptedException {
+
+        log.info("#######");
+        log.info("[ Driver Status ] initializing");
+        log.info("#######");
+        driver.get(url);
+
+        // Test
+        By hardwareAndNotebooksSelector = By.xpath("//*[@id=\"mat-expansion-panel-header-21\"]/span/mat-panel-title");
+        WebElement hardwareAndNotebook = wait.until(ExpectedConditions.presenceOfElementLocated(hardwareAndNotebooksSelector));
+
+        hardwareAndNotebook.click();
+
+        By notebookOptionSelector = By.xpath("//*[@id=\"cdk-accordion-child-21\"]/div/p[2]/span");
+        WebElement notebookOption = wait.until(ExpectedConditions.elementToBeClickable(notebookOptionSelector));
+
+        notebookOption.click();
+
+        By maximumFieldSelector = By.id("mat-input-2");
+        WebElement maximumField = wait.until(ExpectedConditions.elementToBeClickable(maximumFieldSelector));
+
+        maximumField.sendKeys("LSRSTS");
+
+        String maximumFieldCheck = maximumField.getAttribute("value");
+        if (!maximumFieldCheck.isEmpty()) {
+            Assert.fail("The field is complete.");
+        } else {
+            System.out.println("The field is empty.");
+        }
+    }
+
+    @Test(priority = 8)
+    public void SpecialCharactersInTheMinimumPriceFilterPDT008() throws InterruptedException {
+
+        log.info("#######");
+        log.info("[ Driver Status ] initializing");
+        log.info("#######");
+        driver.get(url);
+
+        // Test
+        By hardwareAndNotebooksSelector = By.xpath("//*[@id=\"mat-expansion-panel-header-21\"]/span/mat-panel-title");
+        WebElement hardwareAndNotebook = wait.until(ExpectedConditions.presenceOfElementLocated(hardwareAndNotebooksSelector));
+
+        hardwareAndNotebook.click();
+
+        By notebookOptionSelector = By.xpath("//*[@id=\"cdk-accordion-child-21\"]/div/p[2]/span");
+        WebElement notebookOption = wait.until(ExpectedConditions.elementToBeClickable(notebookOptionSelector));
+
+        notebookOption.click();
+
+        By minimumFieldSelector = By.id("mat-input-1");
+        WebElement minimumField = wait.until(ExpectedConditions.elementToBeClickable(minimumFieldSelector));
+
+        minimumField.sendKeys("%$@$@#$@%");
+
+        String minimumFieldCheck = minimumField.getAttribute("value");
+        if (!minimumFieldCheck.isEmpty()) {
+            Assert.fail("The field is complete.");
+        } else {
+            System.out.println("The field is empty.");
         }
     }
 
