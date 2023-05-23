@@ -136,7 +136,7 @@ public class TestingIDLG {
         if (RegisterPopup.isDisplayed()) {
             System.out.println("The windows login is visible.");
         } else {
-            System.out.println("The windows login is not visible.");
+            Assert.fail("The windows login is not visible.");
         }
     }
 
