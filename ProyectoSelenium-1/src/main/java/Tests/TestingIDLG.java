@@ -41,18 +41,25 @@ public class TestingIDLG {
         String email = "Admin123@gmail.com";
         String password = "Admin";
 
-        // Test
+        // --- Test ---
+
+        // The "INICIAR SESION" button is clicked.
         driver.findElement(By.className("mat-focus-indicator")).click();
 
+        // The field is completed with the email.
         driver.findElement(By.cssSelector("div.ng-tns-c103-4 input.mat-input-element")).sendKeys(email);;
 
+        // The "CONTINUAR" button is clicked.
         driver.findElement(By.className("continue")).click();
 
+        // Wait for field to appear.
         By passwordSelector = By.cssSelector("div.ng-tns-c103-6 input.mat-input-element");
         WebElement passwordInput = wait.until(ExpectedConditions.presenceOfElementLocated(passwordSelector));
 
+        // The field is completed with the password.
         passwordInput.sendKeys(password);
 
+        // The "INGRESAR" button is clicked for the location.
         WebElement enterBtn = driver.findElement(By.xpath("//*[@id=\"mat-dialog-0\"]/cgw-dialog-modal/div/cgw-login/div/div/div/button[1]/span"));
 
         Point location = enterBtn.getLocation();
@@ -62,6 +69,7 @@ public class TestingIDLG {
         Actions actions = new Actions(driver);
         actions.moveByOffset(positionX, positionY).click().build().perform();
 
+        // It is verified that session is logged in.
         WebElement homeLogo = driver.findElement(By.className("logo"));
         if (homeLogo.isDisplayed()) {
             System.out.println("The session was started.");
@@ -77,14 +85,19 @@ public class TestingIDLG {
         String username = "Agustin";
         String lastname = "Togni Balassi";
 
-        // Test
+        // --- Test ---
+
+        // The "INICIAR SESION" button is clicked.
         driver.findElement(By.className("mat-button-wrapper")).click();
 
+        // The "CREAR CUENTA" button is clicked.
         driver.findElement(By.className("mat-stroked-button")).click();
 
+        // The field is completed with the username.
         WebElement usernameInput = driver.findElement(By.id("mat-input-2"));
         usernameInput.sendKeys(username);
 
+        // It is verified that the field is complete.
         String usernameCheck = usernameInput.getAttribute("value");
         if (!usernameCheck.isEmpty()) {
             System.out.println("The field is complete");
@@ -92,9 +105,11 @@ public class TestingIDLG {
             Assert.fail("The field is empty");
         }
 
+        // The field is completed with the lastname.
         WebElement lastnameInput = driver.findElement(By.id("mat-input-3"));
         lastnameInput.sendKeys(lastname);
 
+        // It is verified that the field is complete.
         String lastnameCheck = lastnameInput.getAttribute("value");
         if (!lastnameCheck.isEmpty()) {
             System.out.println("The field is complete");
@@ -106,14 +121,19 @@ public class TestingIDLG {
     @Test(priority = 3)
     public void RegisterWithValidDataLG003() throws InterruptedException {
 
-        // Test
+        // --- Test ---
+
+        // The "INICIAR SESION" button is clicked.
         driver.findElement(By.className("mat-button-wrapper")).click();
 
+        // The "CREAR CUENTA" button is clicked.
         driver.findElement(By.className("mat-stroked-button")).click();
 
+        // The field is completed with the phone.
         WebElement phoneInput = driver.findElement(By.id("mat-input-6"));
         phoneInput.sendKeys("82372233");
 
+        // It is verified that the field is complete.
         String phoneCheck = phoneInput.getAttribute("value");
         if (!phoneCheck.isEmpty()) {
             System.out.println("The field is complete");
@@ -125,13 +145,18 @@ public class TestingIDLG {
     @Test(priority = 4)
     public void CorrectRedirectionOfAlreadyHaveAnAccountLG004() throws InterruptedException {
 
-        //  Test
+        // --- Test ---
+
+        // The "INICIAR SESION" button is clicked.
         driver.findElement(By.className("mat-button-wrapper")).click();
 
+        // The "CREAR CUENTA" button is clicked.
         driver.findElement(By.className("mat-stroked-button")).click();
 
+        // The "aca" blue button is clicked.
         driver.findElement(By.cssSelector("a.vinculo")).click();
 
+        // It is verified that the login window is visible.
         WebElement RegisterPopup = driver.findElement(By.id("mat-dialog-0"));
         if (RegisterPopup.isDisplayed()) {
             System.out.println("The windows login is visible.");
@@ -143,14 +168,19 @@ public class TestingIDLG {
     @Test(priority = 5)
     public void RegisterWithNumbersInTheNameFieldLG005() throws InterruptedException {
 
-        //  Test
+        // --- Test ---
+
+        // The "INICIAR SESION" button is clicked.
         driver.findElement(By.className("mat-button-wrapper")).click();
 
+        // The "CREAR CUENTA" button is clicked.
         driver.findElement(By.className("mat-stroked-button")).click();
 
+        // The field is complete with numbers.
         WebElement nameInput = driver.findElement(By.id("mat-input-2"));
         nameInput.sendKeys("1231312312");
 
+        // It is verified that field is complete.
         String fieldCheck = nameInput.getAttribute("value");
         if (!fieldCheck.isEmpty()) {
             Assert.fail("The field is complete");
@@ -162,14 +192,19 @@ public class TestingIDLG {
     @Test(priority = 6)
     public void RegisterWithSpecialCharactersInTheLastnameFieldLG006() throws InterruptedException {
 
-        // Test
+        // --- Test ---
+
+        // The "INICIAR SESION" button is clicked.
         driver.findElement(By.className("mat-button-wrapper")).click();
 
+        // The "CREAR CUENTA" button is clicked.
         driver.findElement(By.className("mat-stroked-button")).click();
 
+        // The field is complete with special characters.
         WebElement lastnameInput = driver.findElement(By.id("mat-input-3"));
         lastnameInput.sendKeys("%$@$@#$@%");
 
+        // It is verified that field is complete.
         String fieldCheck = lastnameInput.getAttribute("value");
         if (!fieldCheck.isEmpty()) {
             Assert.fail("The field is complete");
@@ -181,11 +216,15 @@ public class TestingIDLG {
     @Test(priority = 7)
     public void RegisterWithOutEnteringDataLG007() throws InterruptedException {
 
-        // Test
+        // --- Test ---
+
+        // The "INICIAR SESION" button is clicked.
         driver.findElement(By.className("mat-button-wrapper")).click();
 
+        // The "CREAR CUENTA" button is clicked.
         driver.findElement(By.className("mat-stroked-button")).click();
 
+        // It is verified that button is disable.
         WebElement registerBtn = driver.findElement(By.xpath("//*[@id=\"mat-dialog-0\"]/cgw-dialog-modal/div/cgw-login/div[2]/cgw-register/div/div/form/button"));
 
         if (!registerBtn.isEnabled()) {
@@ -198,14 +237,19 @@ public class TestingIDLG {
     @Test(priority = 8)
     public void RegisterWithLettersInThePhoneFieldLG008() throws InterruptedException {
 
-        // Test
+        // --- Test ---
+
+        // The "INICIAR SESION" button is clicked.
         driver.findElement(By.className("mat-button-wrapper")).click();
 
+        // The "CREAR CUENTA" button is clicked.
         driver.findElement(By.className("mat-stroked-button")).click();
 
+        // The field is complete with letters.
         WebElement phoneInput = driver.findElement(By.id("mat-input-6"));
         phoneInput.sendKeys("LLDALDASA");
 
+        // It is verified that field is complete.
         String fieldCheck = phoneInput.getAttribute("value");
         if (!fieldCheck.isEmpty()) {
             Assert.fail("The field is complete");
