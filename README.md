@@ -1,7 +1,7 @@
 # ProyectoSelenium-1
 
-### 🚧En Proceso🚧
-Este proyecto aún está en desarrollo, por lo cual se podrá ver como faltan aún cosas por terminar, así como otras en estado incompleto. Cuando dicho proyecto esté terminado será especificado.
+### 🔋Terminado🔋
+Este proyecto se encuentra finalizado, sin embargo, puede sufrir algunas modificaciones posteriores, ya sea por errores encontrados, optimización, cambios de versión, entre otros.
 
 ### 📰Descripcion📰
 En este proyecto se busca automatizar todos los casos de prueba realizados para el proyecto final del curso "Tester QA Manual" de CoderHouse mediante Selenium con Java.
