@@ -38,15 +38,19 @@ public class TestingIDCRT {
         log.info("#######");
         driver.get(url);
 
-        // Test
+        // --- Test ---
+
+        // The "SEGUIR COMPRANDO" button is clicked.
         driver.findElement(By.xpath("//*[@id=\"wrapper\"]/cgw-patch/div/div/cgw-shopping-cart/div/div/div[2]/div/button/span/span")).click();
 
+        // Wait of 3 seconds.
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+        // It is verified that "PRODUCTO" section is visible.
         WebElement imgOutstanding = driver.findElement(By.xpath("//*[@id=\"productos-container\"]/div/div/div/cgw-products-list/cgw-banners-subcategory/div/div[2]/picture/img"));
         if (imgOutstanding.isDisplayed()) {
             System.out.println("The outstanding image is visible.");
@@ -63,12 +67,16 @@ public class TestingIDCRT {
         log.info("#######");
         driver.get(url2);
 
-        // Test
+        // --- Test ---
+
+        // Wait for "AGREGAR AL CARRITO" to appear.
         By btnAddToCartSelector = By.xpath("//*[@id=\"productos-container\"]/div/div/div/cgw-products-list/div/div[2]/div[2]/div/cgw-product-alone[1]/div/div[2]/div[3]/button");
         WebElement btnAddToCart = wait.until(ExpectedConditions.presenceOfElementLocated(btnAddToCartSelector));
 
+        // The "AGREGAR AL CARRITO" button is clicked.
         btnAddToCart.click();
 
+        // It is verified that the product was added to cart.
         WebElement Cart = driver.findElement(By.className("mat-icon-button"));
         if (Cart.isDisplayed()) {
             System.out.println("The product was added to cart.");
@@ -86,22 +94,30 @@ public class TestingIDCRT {
         log.info("#######");
         driver.get(url2);
 
-        // Test
+        // --- Test ---
+
+        // Wait for "AGREGAR AL CARRITO" to appear.
         By btnAddToCartSelector = By.xpath("//*[@id=\"productos-container\"]/div/div/div/cgw-products-list/div/div[2]/div[2]/div/cgw-product-alone[1]/div/div[2]/div[3]/button");
         WebElement btnAddToCart = wait.until(ExpectedConditions.presenceOfElementLocated(btnAddToCartSelector));
 
+        // The "AGREGAR AL CARRITO" button is clicked.
         btnAddToCart.click();
 
+        // Wait for cart to appear.
         By cartSelector = By.className("mat-icon-button");
         WebElement cart = wait.until(ExpectedConditions.presenceOfElementLocated(cartSelector));
 
+        // The cart is clicked.
         cart.click();
 
+        // Wait for field to appear.
         By zipCodeSelector = By.id("mat-input-2");
         WebElement zipCodeInput = wait.until(ExpectedConditions.presenceOfElementLocated(zipCodeSelector));
 
+        // The field is complete with zip code.
         zipCodeInput.sendKeys("1625");
 
+        // It is verified that the field is complete.
         String zipCodeInputCheck = zipCodeInput.getAttribute("value");
         if (!zipCodeInputCheck.isEmpty()) {
             System.out.println("The field is complete.");
@@ -118,19 +134,26 @@ public class TestingIDCRT {
         log.info("#######");
         driver.get(url2);
 
-        // Test
+        // --- Test ----
+
+        // Wait for "AGREGAR AL CARRITO" to appear.
         By btnAddToCartSelector = By.xpath("//*[@id=\"productos-container\"]/div/div/div/cgw-products-list/div/div[2]/div[2]/div/cgw-product-alone[1]/div/div[2]/div[3]/button");
         WebElement btnAddToCart = wait.until(ExpectedConditions.presenceOfElementLocated(btnAddToCartSelector));
 
+        // The "AGREGAR AL CARRITO" button is clicked.
         btnAddToCart.click();
 
+        // Wait for cart to appear.
         By cartSelector = By.className("mat-icon-button");
         WebElement cart = wait.until(ExpectedConditions.presenceOfElementLocated(cartSelector));
 
+        // The cart is clicked.
         cart.click();
 
+        // The trash button is clicked.
         driver.findElement(By.className("icon-trash")).click();
 
+        // It is verified that the cart is empty.
         WebElement alert = driver.findElement(By.xpath("//*[@id=\"wrapper\"]/cgw-patch/div/div/cgw-shopping-cart/div/div/div[2]/div/h3"));
         if (alert.isDisplayed()) {
             System.out.println("The cart is empty.");
@@ -151,24 +174,33 @@ public class TestingIDCRT {
         // Credentials
         String discountCode = "InvalidCode123";
 
-        // Test
+        // --- Test ---
+
+        // Wait for "AGREGAR AL CARRITO" to appear.
         By btnAddToCartSelector = By.xpath("//*[@id=\"productos-container\"]/div/div/div/cgw-products-list/div/div[2]/div[2]/div/cgw-product-alone[1]/div/div[2]/div[3]/button");
         WebElement btnAddToCart = wait.until(ExpectedConditions.presenceOfElementLocated(btnAddToCartSelector));
 
+        // The "AGREGAR AL CARRITO" button is clicked.
         btnAddToCart.click();
 
+        // Wait for cart to appear.
         By cartSelector = By.className("mat-icon-button");
         WebElement cart = wait.until(ExpectedConditions.presenceOfElementLocated(cartSelector));
 
+        // The cart is clicked.
         cart.click();
 
+        // The field is complete with discount code.
         driver.findElement(By.id("mat-input-1")).sendKeys(discountCode);
 
+        // The "APLICAR" button is clicked.
         driver.findElement(By.xpath("//*[@id=\"commands\"]/button")).click();
 
+        // Wait for alert to appear.
         By alertSelector = By.className("ng-star-inserted");
         WebElement alert = wait.until(ExpectedConditions.presenceOfElementLocated(alertSelector));
 
+        // It is verified that the alert is visible.
         if (alert.isDisplayed()) {
             System.out.println("The alert is visible.");
         } else {
@@ -184,22 +216,30 @@ public class TestingIDCRT {
         log.info("#######");
         driver.get(url2);
 
-        // Test
+        // --- Test ---
+
+        // Wait for "AGREGAR AL CARRITO" to appear.
         By btnAddToCartSelector = By.xpath("//*[@id=\"productos-container\"]/div/div/div/cgw-products-list/div/div[2]/div[2]/div/cgw-product-alone[1]/div/div[2]/div[3]/button");
         WebElement btnAddToCart = wait.until(ExpectedConditions.presenceOfElementLocated(btnAddToCartSelector));
 
+        // The "AGREGAR AL CARRITO" button is clicked.
         btnAddToCart.click();
 
+        // Wait for cart to appear.
         By cartSelector = By.className("mat-icon-button");
         WebElement cart = wait.until(ExpectedConditions.presenceOfElementLocated(cartSelector));
 
+        // The cart is clicked.
         cart.click();
 
+        // Wait for field to appear.
         By zipCodeSelector = By.id("mat-input-2");
         WebElement zipCodeInput = wait.until(ExpectedConditions.presenceOfElementLocated(zipCodeSelector));
 
+        // The field is completed with invalid zip code.
         zipCodeInput.sendKeys("sdasdasda");
 
+        // It is verified that the field is complete.
         String zipCodeInputCheck = zipCodeInput.getAttribute("value");
         if (!zipCodeInputCheck.isEmpty()) {
             Assert.fail("The field is complete.");
@@ -216,22 +256,30 @@ public class TestingIDCRT {
         log.info("#######");
         driver.get(url2);
 
-        // Test
+        // --- Test ---
+
+        // Wait for "AGREGAR AL CARRITO" to appear.
         By btnAddToCartSelector = By.xpath("//*[@id=\"productos-container\"]/div/div/div/cgw-products-list/div/div[2]/div[2]/div/cgw-product-alone[1]/div/div[2]/div[3]/button");
         WebElement btnAddToCart = wait.until(ExpectedConditions.presenceOfElementLocated(btnAddToCartSelector));
 
+        // The "AGREGAR AL CARRITO" button is clicked.
         btnAddToCart.click();
 
+        // Wait for cart to appear.
         By cartSelector = By.className("mat-icon-button");
         WebElement cart = wait.until(ExpectedConditions.presenceOfElementLocated(cartSelector));
 
+        // The cart is clicked.
         cart.click();
 
+        // Wait for field to appear.
         By zipCodeSelector = By.id("mat-input-2");
         WebElement zipCodeInput = wait.until(ExpectedConditions.presenceOfElementLocated(zipCodeSelector));
 
+        // The field is complete with invalid zip code.
         zipCodeInput.sendKeys("%$@$@#$@%");
 
+        // It is verified that the field is complete.
         String zipCodeInputCheck = zipCodeInput.getAttribute("value");
         if (!zipCodeInputCheck.isEmpty()) {
             Assert.fail("The field is complete.");
@@ -248,28 +296,35 @@ public class TestingIDCRT {
         log.info("#######");
         driver.get(url2);
 
-        // Test
+        // --- Test ---
+
+        // Wait for "AGREGAR AL CARRITO" to appear.
         By btnAddToCartSelector = By.xpath("//*[@id=\"productos-container\"]/div/div/div/cgw-products-list/div/div[2]/div[2]/div/cgw-product-alone[1]/div/div[2]/div[3]/button");
         WebElement btnAddToCart = wait.until(ExpectedConditions.presenceOfElementLocated(btnAddToCartSelector));
 
+        // The "AGREGAR AL CARRITO" button is clicked.
         btnAddToCart.click();
 
+        // Wait for cart to appear.
         By cartSelector = By.className("mat-icon-button");
         WebElement cart = wait.until(ExpectedConditions.presenceOfElementLocated(cartSelector));
 
+        // The cart is clicked.
         cart.click();
 
+        // Infinite clicks on the "+" button.
         WebElement addToCart = driver.findElement(By.xpath("//*[@id=\"commands\"]/div/span[3]/button"));
 
         while (addToCart.isEnabled()) {
             addToCart.click();
         }
 
+        // It is verified that the limit alert is visible.
         WebElement alertLimit = driver.findElement(By.className("warning"));
         if (alertLimit.isDisplayed()) {
-            System.out.println("The alert limit is visible.");
+            System.out.println("The limit alert is visible.");
         } else {
-            Assert.fail("The alert limit is not visible");
+            Assert.fail("The limit alert is not visible");
         }
     }
 

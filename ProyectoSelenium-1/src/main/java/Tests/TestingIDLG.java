@@ -46,7 +46,7 @@ public class TestingIDLG {
         // The "INICIAR SESION" button is clicked.
         driver.findElement(By.className("mat-focus-indicator")).click();
 
-        // The field is completed with the email.
+        // The field is complete with the email.
         driver.findElement(By.cssSelector("div.ng-tns-c103-4 input.mat-input-element")).sendKeys(email);;
 
         // The "CONTINUAR" button is clicked.
@@ -56,7 +56,7 @@ public class TestingIDLG {
         By passwordSelector = By.cssSelector("div.ng-tns-c103-6 input.mat-input-element");
         WebElement passwordInput = wait.until(ExpectedConditions.presenceOfElementLocated(passwordSelector));
 
-        // The field is completed with the password.
+        // The field is complete with the password.
         passwordInput.sendKeys(password);
 
         // The "INGRESAR" button is clicked for the location.

@@ -40,11 +40,15 @@ public class TestingIDPDT {
         log.info("#######");
         driver.get(url);
 
-        // Test
+        // --- Test ---
+
+        // The browser window is maximized.
         driver.manage().window().maximize();
 
+        // The grid mode button is clicked.
         driver.findElement(By.className("boton-inactivo")).click();
 
+        // It is verified that the grid mode is visible.
         WebElement grid = driver.findElement(By.className("prueba_grid"));
         if (grid.isDisplayed()) {
             System.out.println("The Grid Mode is visible");
@@ -61,9 +65,12 @@ public class TestingIDPDT {
         log.info("#######");
         driver.get(url);
 
-        // Test
+        // --- Test ---
+
+        // The "Ordenar por" button is clicked.
         driver.findElement(By.className("mat-select-arrow-wrapper")).click();
 
+        // The "Destacados" filter is clicked.
         List<WebElement> options = driver.findElements(By.className("mat-option-text"));
 
         boolean actionPerformed = false;
@@ -75,6 +82,7 @@ public class TestingIDPDT {
             }
         }
 
+        // It is verified the featured filter is on.
         if (actionPerformed) {
             System.out.println("The featured filter is enable.");
         } else {
@@ -90,9 +98,12 @@ public class TestingIDPDT {
         log.info("#######");
         driver.get(url);
 
-        // Test
+        // --- Test ---
+
+        // The "Ordenar por" button is clicked.
         driver.findElement(By.className("mat-select-arrow-wrapper")).click();
 
+        // The "Mayor precio" filter is clicked.
         List<WebElement> options = driver.findElements(By.className("mat-option-text"));
 
         boolean actionPerformed = false;
@@ -104,6 +115,7 @@ public class TestingIDPDT {
             }
         }
 
+        // It is verified the higher price filter is on.
         if (actionPerformed) {
             System.out.println("The higher price filter is enable.");
         } else {
@@ -123,34 +135,48 @@ public class TestingIDPDT {
         String email = "Admin123@gmail.com";
         String password = "Admin";
 
-        // Test
+        // --- Test ---
+
+        // The browser windows is maximize.
         driver.manage().window().maximize();
 
+        // The "INICIAR SESION" button is clicked.
         driver.findElement(By.className("mat-button-wrapper")).click();
 
+        // The field is complete with email.
         driver.findElement(By.cssSelector("div.ng-tns-c103-4 input.mat-input-element")).sendKeys(email);
 
+        // The "CONTINUAR" button is clicked.
         driver.findElement(By.className("continue")).click();
 
+        // Wait for field to appear.
         By passwordSelector = By.cssSelector("div.ng-tns-c103-6 input.mat-input-element");
         WebElement passwordInput = wait.until(ExpectedConditions.presenceOfElementLocated(passwordSelector));
 
+        // The field is complete with password.
         passwordInput.sendKeys(password);
 
+        // The "INGRESAR" button is clicked for the location.
         WebElement enterBtn = driver.findElement(By.xpath("//*[@id=\"mat-dialog-0\"]/cgw-dialog-modal/div/cgw-login/div/div/div/button[1]/span"));
+
         Point location = enterBtn.getLocation();
         int positionX = location.getX();
         int positionY = location.getY();
+
         Actions actions = new Actions(driver);
         actions.moveByOffset(positionX, positionY).click().build().perform();
 
+        // The "PRODUCTOS" section is clicked.
         driver.findElement(By.id("productos")).click();
 
+        // Wait for "AGREGAR AL CARRITO" to appear.
         By btnAddToCartSelector = By.xpath("//*[@id=\"productos-container\"]/div/div/div/cgw-products-list/div/div[2]/div[2]/div/cgw-product-alone[1]/div/div[2]/div[3]/button");
         WebElement btnAddToCart = wait.until(ExpectedConditions.presenceOfElementLocated(btnAddToCartSelector));
 
+        // The "AGREGAR AL CARRITO" button is clicked.
         btnAddToCart.click();
 
+        // It is verified that the product was to cart.
         WebElement cart = driver.findElement(By.id("carrito-angular"));
         if (cart.isDisplayed()) {
             System.out.println("The product was add to cart");
@@ -172,36 +198,50 @@ public class TestingIDPDT {
         String email = "Admin123@gmail.com";
         String password = "Admin";
 
-        // Test
+        // --- Test ---
+
+        // The browser windows is maximize.
         driver.manage().window().maximize();
 
+        // The "INICIAR SESION" button is clicked.
         driver.findElement(By.className("mat-button-wrapper")).click();
 
+        // The field is complete with email.
         driver.findElement(By.cssSelector("div.ng-tns-c103-4 input.mat-input-element")).sendKeys(email);
 
+        // The "CONTINUAR" button is clicked.
         driver.findElement(By.className("continue")).click();
 
+        // Wait for field to appear.
         By passwordSelector = By.cssSelector("div.ng-tns-c103-6 input.mat-input-element");
         WebElement passwordInput = wait.until(ExpectedConditions.presenceOfElementLocated(passwordSelector));
 
+        // The field is complete with password.
         passwordInput.sendKeys(password);
 
+        // The "INGRESAR" button is clicked for the location.
         WebElement enterBtn = driver.findElement(By.xpath("//*[@id=\"mat-dialog-0\"]/cgw-dialog-modal/div/cgw-login/div/div/div/button[1]/span"));
+
         Point location = enterBtn.getLocation();
         int positionX = location.getX();
         int positionY = location.getY();
+
         Actions actions = new Actions(driver);
         actions.moveByOffset(positionX, positionY).click().build().perform();
 
+        // The "PRODUCTOS" section is clicked.
         driver.findElement(By.id("productos")).click();
 
+        // Wait for "AGREGAR AL CARRITO" to appear.
         By btnAddToCartSelector = By.xpath("//*[@id=\"productos-container\"]/div/div/div/cgw-products-list/div/div[2]/div[2]/div/cgw-product-alone[1]/div/div[2]/div[3]/button");
         WebElement btnAddToCart = wait.until(ExpectedConditions.presenceOfElementLocated(btnAddToCartSelector));
 
+        // Infinite clicks on the "AGREGAR AL CARRITO" button.
         while (btnAddToCart.isEnabled()) {
             btnAddToCart.click();
         }
 
+        // It is verified the button is off.
         if (!btnAddToCart.isEnabled()) {
             System.out.println("The button is disable.");
         } else {
@@ -217,22 +257,30 @@ public class TestingIDPDT {
         log.info("#######");
         driver.get(url);
 
-        // Test
+        // --- Test ---
+
+        // Wait for hardware and notebook section to appear.
         By hardwareAndNotebooksSelector = By.xpath("//*[@id=\"mat-expansion-panel-header-21\"]/span/mat-panel-title");
         WebElement hardwareAndNotebook = wait.until(ExpectedConditions.presenceOfElementLocated(hardwareAndNotebooksSelector));
 
+        // The hardware and notebook button is clicked.
         hardwareAndNotebook.click();
 
+        // Wait for notebook option to appear.
         By notebookOptionSelector = By.xpath("//*[@id=\"cdk-accordion-child-21\"]/div/p[2]/span");
         WebElement notebookOption = wait.until(ExpectedConditions.elementToBeClickable(notebookOptionSelector));
 
+        // The notebook option is clicked.
         notebookOption.click();
 
+        // Wait for minimum field to appear.
         By minimumFieldSelector = By.id("mat-input-1");
         WebElement minimumField = wait.until(ExpectedConditions.elementToBeClickable(minimumFieldSelector));
 
+        // The field is complete with letters.
         minimumField.sendKeys("LSRSTS");
 
+        // It is verified that the field is complete.
         String minimumFieldCheck = minimumField.getAttribute("value");
         if (!minimumFieldCheck.isEmpty()) {
             Assert.fail("The field is complete.");
@@ -249,22 +297,30 @@ public class TestingIDPDT {
         log.info("#######");
         driver.get(url);
 
-        // Test
+        // --- Test ---
+
+        // Wait for hardware and notebook section to appear.
         By hardwareAndNotebooksSelector = By.xpath("//*[@id=\"mat-expansion-panel-header-21\"]/span/mat-panel-title");
         WebElement hardwareAndNotebook = wait.until(ExpectedConditions.presenceOfElementLocated(hardwareAndNotebooksSelector));
 
+        // The hardware and notebook button is clicked.
         hardwareAndNotebook.click();
 
+        // Wait for notebook option to appear.
         By notebookOptionSelector = By.xpath("//*[@id=\"cdk-accordion-child-21\"]/div/p[2]/span");
         WebElement notebookOption = wait.until(ExpectedConditions.elementToBeClickable(notebookOptionSelector));
 
+        // The notebook option is clicked.
         notebookOption.click();
 
+        // Wait for maximum field to appear.
         By maximumFieldSelector = By.id("mat-input-2");
         WebElement maximumField = wait.until(ExpectedConditions.elementToBeClickable(maximumFieldSelector));
 
+        // The field is complete with letters.
         maximumField.sendKeys("LSRSTS");
 
+        // It is verified that the field is complete.
         String maximumFieldCheck = maximumField.getAttribute("value");
         if (!maximumFieldCheck.isEmpty()) {
             Assert.fail("The field is complete.");
@@ -281,22 +337,30 @@ public class TestingIDPDT {
         log.info("#######");
         driver.get(url);
 
-        // Test
+        // --- Test ---
+
+        // Wait for hardware and notebook section to appear.
         By hardwareAndNotebooksSelector = By.xpath("//*[@id=\"mat-expansion-panel-header-21\"]/span/mat-panel-title");
         WebElement hardwareAndNotebook = wait.until(ExpectedConditions.presenceOfElementLocated(hardwareAndNotebooksSelector));
 
+        // The hardware and notebook button is clicked.
         hardwareAndNotebook.click();
 
+        // Wait for notebook option to appear.
         By notebookOptionSelector = By.xpath("//*[@id=\"cdk-accordion-child-21\"]/div/p[2]/span");
         WebElement notebookOption = wait.until(ExpectedConditions.elementToBeClickable(notebookOptionSelector));
 
+        // The notebook option is clicked.
         notebookOption.click();
 
+        // Wait for minimum field to appear.
         By minimumFieldSelector = By.id("mat-input-1");
         WebElement minimumField = wait.until(ExpectedConditions.elementToBeClickable(minimumFieldSelector));
 
+        // The field is complete with special characters.
         minimumField.sendKeys("%$@$@#$@%");
 
+        // It is verified that the field is complete.
         String minimumFieldCheck = minimumField.getAttribute("value");
         if (!minimumFieldCheck.isEmpty()) {
             Assert.fail("The field is complete.");
