@@ -22,9 +22,9 @@ public class TestingIDCRT {
 
     @BeforeMethod
     public void setBaseUrl(){
-        System.setProperty("webdriver.chrome.driver", "E:\\ProyectosSelinium\\ProyectoSelenium-1\\src\\main\\resources\\drivers\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "E:\\ProyectosSelenium\\ProyectoSelenium-1\\src\\main\\resources\\drivers\\chromedriver.exe");
         driver = new ChromeDriver();
-        log = LogManager.getLogger(TestingIDLG.class);
+        log = LogManager.getLogger(TestingIDCRT.class);
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
